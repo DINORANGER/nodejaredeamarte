@@ -142,6 +142,17 @@
   transition: opacity 0.9s ease;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
 }
+    #texto.compacto {
+  font-size: clamp(1.2rem, 3.5vw, 2.35rem);
+  line-height: 1.5;
+  padding-top: 35px;
+}
+
+#texto.muy-compacto {
+  font-size: clamp(1.05rem, 3vw, 1.95rem);
+  line-height: 1.42;
+  padding-top: 20px;
+}
     .cursor {
       display: inline-block;
       width: 2px;
@@ -880,6 +891,16 @@ mi corazón todavía no hubiera entendido aquello que mi cabeza llevaba horas in
     }
 
     async function escribir(textoCompleto) {
+          texto.classList.remove("compacto", "muy-compacto");
+
+    const cantidadLineas = textoCompleto.split("\n").length;
+    const cantidadCaracteres = textoCompleto.length;
+
+    if (cantidadLineas >= 10 || cantidadCaracteres > 260) {
+        texto.classList.add("muy-compacto");
+    } else if (cantidadLineas >= 7 || cantidadCaracteres > 170) {
+        texto.classList.add("compacto");
+    }
       texto.innerHTML = "";
 
       const contenido = document.createElement("span");
