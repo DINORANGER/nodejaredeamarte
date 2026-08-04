@@ -1,57 +1,506 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para ti.</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+  <title>Hay cosas que nunca pude decirte</title>
 
-body{
-margin:0;
-background:#0b0b0b;
-color:white;
-font-family:Georgia,serif;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.contenedor{
-max-width:800px;
-padding:60px;
-line-height:2;
-font-size:22px;
-}
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
 
-h1{
-font-size:55px;
-text-align:center;
-margin-bottom:40px;
-}
+    body {
+      background: #080808;
+      color: #f3efe8;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow: hidden;
+    }
 
-</style>
+    .pantalla {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background:
+        radial-gradient(
+          circle at center,
+          #171514 0%,
+          #0c0b0b 48%,
+          #050505 100%
+        );
+      transition: opacity 1.5s ease;
+    }
 
+    .oculta {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #introduccion {
+      z-index: 10;
+      text-align: center;
+    }
+
+    .intro-contenido {
+      width: min(720px, 100%);
+    }
+
+    .intro-frase {
+      font-size: clamp(2rem, 7vw, 4.8rem);
+      font-weight: normal;
+      line-height: 1.22;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: aparecer 2.2s ease forwards;
+    }
+
+    .intro-frase.segunda {
+      margin-top: 18px;
+      animation-delay: 2.3s;
+    }
+
+    #botonComenzar {
+      margin-top: 52px;
+      padding: 14px 36px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
+      background: transparent;
+      color: #f3efe8;
+      font-family: inherit;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0;
+      animation: aparecer 1.8s ease forwards;
+      animation-delay: 4.8s;
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    #botonComenzar:hover {
+      background: #f3efe8;
+      color: #090909;
+      transform: translateY(-2px);
+    }
+
+    #historia {
+      z-index: 5;
+      text-align: center;
+      opacity: 0;
+    }
+
+    #historia.visible {
+      opacity: 1;
+    }
+
+    .historia-contenido {
+      width: min(880px, 100%);
+    }
+
+    #texto {
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: pre-line;
+      font-size: clamp(1.45rem, 4.5vw, 3rem);
+      line-height: 1.65;
+      letter-spacing: 0.015em;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      margin-left: 6px;
+      background: #f3efe8;
+      vertical-align: -0.08em;
+      animation: parpadear 0.8s infinite;
+    }
+
+    #final {
+      z-index: 20;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #final.visible {
+      opacity: 1;
+    }
+
+    .final-contenido {
+      width: min(850px, 100%);
+    }
+
+    .final-linea {
+      opacity: 0;
+      transform: translateY(15px);
+      font-size: clamp(1.8rem, 5.5vw, 4rem);
+      line-height: 1.5;
+    }
+
+    .final-linea.activa {
+      animation: aparecer 2s ease forwards;
+    }
+
+    .final-linea.importante {
+      margin-top: 22px;
+      font-style: italic;
+    }
+
+    #audio {
+      display: none;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes parpadear {
+      0%,
+      45% {
+        opacity: 1;
+      }
+
+      46%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .pantalla {
+        padding: 24px;
+      }
+
+      #texto {
+        min-height: 350px;
+        line-height: 1.6;
+      }
+
+      #botonComenzar {
+        margin-top: 42px;
+        padding: 13px 30px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="contenedor">
+  <section id="introduccion" class="pantalla">
+    <div class="intro-contenido">
+      <h1 class="intro-frase">Hay cosas...</h1>
 
-<h1>Para ti.</h1>
+      <h2 class="intro-frase segunda">
+        que nunca pude decirte.
+      </h2>
 
-<p>
-Si estás leyendo esto...
-es porque había cosas que nunca pude decirte de la manera en que realmente las sentía.
-</p>
+      <button id="botonComenzar">
+        Comenzar
+      </button>
+    </div>
+  </section>
 
-<p>
-Esta página todavía está en construcción.
-Pero muy pronto aquí estará la carta completa.
-</p>
+  <section id="historia" class="pantalla oculta">
+    <div class="historia-contenido">
+      <div id="texto"></div>
+    </div>
+  </section>
 
-</div>
+  <section id="final" class="pantalla oculta">
+    <div class="final-contenido">
+      <p id="final1" class="final-linea">
+        Y al día siguiente...
+      </p>
+
+      <p id="final2" class="final-linea">
+        lo único que pude hacer...
+      </p>
+
+      <p id="final3" class="final-linea importante">
+        fue seguir pensando en ti.
+      </p>
+    </div>
+  </section>
+
+  <audio id="audio" preload="auto">
+    <source src="cancion.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const introduccion = document.getElementById("introduccion");
+    const historia = document.getElementById("historia");
+    const final = document.getElementById("final");
+    const texto = document.getElementById("texto");
+    const botonComenzar = document.getElementById("botonComenzar");
+    const audio = document.getElementById("audio");
+
+    const fragmentos = [
+      `No sé qué tan difícil pudo ser...
+
+pero lo fue.`,
+
+      `Conté días y noches,
+semanas y meses.
+
+El tiempo que no tenía
+y el tiempo que me sobraba.
+
+Todo para ti.`,
+
+      `Nunca dejé de pensar en ti.
+
+Y si me pongo a reflexionar...
+
+nunca dejé de extrañarte.`,
+
+      `Porque desde ese primer beso
+en nuestra ciudad...
+
+y aquella tarde
+en aquel hotel de playa...
+
+no he parado de quererte.`,
+
+      `Decirte que me gustabas...
+
+y saber que a ti
+te pasaba lo mismo...
+
+fue la mejor sensación
+de aquel año.`,
+
+      `Pero creo que todo
+comenzó mucho antes.`,
+
+      `Cuando te vi en aquella feria,
+cuando éramos niños
+y yo estaba con mi hermana.`,
+
+      `Andrea.`,
+
+      `Desde entonces
+no pude olvidar ese nombre.`,
+
+      `Quedó marcado
+en mi piel
+y en mi mente.`,
+
+      `Antes te quería
+de una forma especial...
+
+de esa forma
+en la que no quieres
+a nadie más.`,
+
+      `Pero ahora es diferente.`,
+
+      `Ahora me siento perdido.
+
+Completamente derrotado.`,
+
+      `Porque ahora te amo.`,
+
+      `Y creo que esta vez
+no es igual...
+
+porque esta vez siento
+que a ti no te pasa lo mismo.`,
+
+      `Lo logré.
+
+Dejé atrás mis miedos,
+mis pensamientos
+y mis inseguridades.`,
+
+      `Solté todo lo que pude
+para darte
+la mejor versión de mí.`,
+
+      `Fui amoroso,
+lindo
+y detallista.`,
+
+      `Quise tratarte bien.
+
+Quise hacerte sentir
+amada de una forma
+que nunca olvidaras.`,
+
+      `Pero no fue suficiente.`,
+
+      `Después de todo eso...
+
+decidiste mentirme
+una y otra vez.`,
+
+      `Incluso mientras
+me veías llorar...
+
+y mientras me decías
+que no querías
+verme así.`,
+
+      `Salir de ahí
+sintiéndome tan mierda...
+
+y poner música...
+
+fue peor.`,
+
+      `¿Sabes lo que es gritar...
+
+"¡Mierda!"
+
+mientras lloras
+a 140 kilómetros por hora?`,
+
+      `¿Sabes lo que es
+sentir que el grito
+se queda sin aire...
+
+y que lo único
+que sale después
+son más lágrimas?`,
+
+      `Pasar por todo eso...
+
+para descubrir
+que esa noche
+dormiste en llamada
+con otra persona.`
+    ];
+
+    const velocidadEscritura = 42;
+    const pausaEntreFragmentos = 2100;
+
+    function esperar(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function escribir(textoCompleto) {
+      texto.innerHTML = "";
+
+      const contenido = document.createElement("span");
+      const cursor = document.createElement("span");
+
+      cursor.className = "cursor";
+
+      texto.appendChild(contenido);
+      texto.appendChild(cursor);
+
+      for (const caracter of textoCompleto) {
+        contenido.textContent += caracter;
+
+        let retraso = velocidadEscritura;
+
+        if (caracter === ".") {
+          retraso = 260;
+        } else if (
+          caracter === "," ||
+          caracter === ":" ||
+          caracter === ";"
+        ) {
+          retraso = 130;
+        } else if (caracter === "\n") {
+          retraso = 180;
+        }
+
+        await esperar(retraso);
+      }
+
+      await esperar(pausaEntreFragmentos);
+
+      texto.style.transition = "opacity 0.9s ease";
+      texto.style.opacity = "0";
+
+      await esperar(900);
+
+      texto.style.opacity = "1";
+    }
+
+    async function comenzarHistoria() {
+      botonComenzar.disabled = true;
+
+      introduccion.classList.add("oculta");
+
+      try {
+        audio.volume = 0.55;
+        await audio.play();
+      } catch (error) {
+        console.log("La canción todavía no está disponible.");
+      }
+
+      await esperar(1500);
+
+      historia.classList.remove("oculta");
+
+      await esperar(100);
+
+      historia.classList.add("visible");
+
+      for (const fragmento of fragmentos) {
+        await escribir(fragmento);
+      }
+
+      historia.classList.add("oculta");
+
+      await esperar(1600);
+
+      mostrarFinal();
+    }
+
+    async function mostrarFinal() {
+      final.classList.remove("oculta");
+
+      await esperar(100);
+
+      final.classList.add("visible");
+
+      const final1 = document.getElementById("final1");
+      const final2 = document.getElementById("final2");
+      const final3 = document.getElementById("final3");
+
+      final1.classList.add("activa");
+
+      await esperar(3000);
+
+      final2.classList.add("activa");
+
+      await esperar(3200);
+
+      final3.classList.add("activa");
+    }
+
+    botonComenzar.addEventListener("click", comenzarHistoria);
+  </script>
 
 </body>
 </html>
