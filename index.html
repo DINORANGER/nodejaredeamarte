@@ -127,19 +127,21 @@
       width: min(900px, 100%);
     }
 
-    #texto {
-      min-height: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      white-space: pre-line;
-      font-size: clamp(1.45rem, 4.4vw, 3rem);
-      line-height: 1.65;
-      letter-spacing: 0.012em;
-      transition: opacity 0.9s ease;
-      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
-    }
-
+#texto {
+  width: 100%;
+  min-height: 300px;
+  display: block;
+  text-align: center;
+  white-space: pre-line;
+  padding-top: 80px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: clamp(1.45rem, 4.4vw, 3rem);
+  line-height: 1.65;
+  letter-spacing: 0.012em;
+  transition: opacity 0.9s ease;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
     .cursor {
       display: inline-block;
       width: 2px;
