@@ -20,8 +20,8 @@
     }
 
     body {
-      background: #080808;
-      color: #f3efe8;
+      background: #050505;
+      color: #f4f0e9;
       font-family: Georgia, "Times New Roman", serif;
       overflow: hidden;
     }
@@ -30,17 +30,17 @@
       position: fixed;
       inset: 0;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       padding: 28px;
       background:
         radial-gradient(
           circle at center,
-          #171514 0%,
-          #0c0b0b 48%,
-          #050505 100%
+          #171513 0%,
+          #0b0a0a 50%,
+          #040404 100%
         );
-      transition: opacity 1.5s ease;
+      transition: opacity 1.6s ease;
     }
 
     .oculta {
@@ -49,58 +49,72 @@
     }
 
     #introduccion {
-      z-index: 10;
+      z-index: 20;
       text-align: center;
     }
 
     .intro-contenido {
-      width: min(720px, 100%);
+      width: min(820px, 100%);
     }
 
-    .intro-frase {
-      font-size: clamp(2rem, 7vw, 4.8rem);
-      font-weight: normal;
-      line-height: 1.22;
-      letter-spacing: 0.02em;
+    #introTexto {
+      min-height: 260px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      white-space: pre-line;
+      font-size: clamp(1.7rem, 5vw, 3.7rem);
+      line-height: 1.55;
+      letter-spacing: 0.015em;
       opacity: 0;
-      transform: translateY(18px);
-      animation: aparecer 2.2s ease forwards;
+      transition:
+        opacity 1.4s ease,
+        transform 1.4s ease;
+      transform: translateY(15px);
     }
 
-    .intro-frase.segunda {
-      margin-top: 18px;
-      animation-delay: 2.3s;
+    #introTexto.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #introTexto.pequeno {
+      font-size: clamp(1.35rem, 4vw, 2.5rem);
     }
 
     #botonComenzar {
-      margin-top: 52px;
-      padding: 14px 36px;
+      margin-top: 35px;
+      padding: 14px 38px;
       border: 1px solid rgba(255, 255, 255, 0.55);
       border-radius: 999px;
       background: transparent;
-      color: #f3efe8;
+      color: #f4f0e9;
       font-family: inherit;
       font-size: 1rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       cursor: pointer;
       opacity: 0;
-      animation: aparecer 1.8s ease forwards;
-      animation-delay: 4.8s;
+      transform: translateY(15px);
       transition:
+        opacity 1.5s ease,
+        transform 1.5s ease,
         background 0.3s ease,
-        color 0.3s ease,
-        transform 0.3s ease;
+        color 0.3s ease;
+    }
+
+    #botonComenzar.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     #botonComenzar:hover {
-      background: #f3efe8;
-      color: #090909;
-      transform: translateY(-2px);
+      background: #f4f0e9;
+      color: #080808;
     }
 
     #historia {
-      z-index: 5;
+      z-index: 10;
       text-align: center;
       opacity: 0;
     }
@@ -110,18 +124,19 @@
     }
 
     .historia-contenido {
-      width: min(880px, 100%);
+      width: min(900px, 100%);
     }
 
     #texto {
-      min-height: 260px;
+      min-height: 300px;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       white-space: pre-line;
-      font-size: clamp(1.45rem, 4.5vw, 3rem);
+      font-size: clamp(1.45rem, 4.4vw, 3rem);
       line-height: 1.65;
-      letter-spacing: 0.015em;
+      letter-spacing: 0.012em;
+      transition: opacity 0.9s ease;
       text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
     }
 
@@ -130,16 +145,51 @@
       width: 2px;
       height: 1em;
       margin-left: 6px;
-      background: #f3efe8;
+      background: #f4f0e9;
       vertical-align: -0.08em;
       animation: parpadear 0.8s infinite;
     }
 
+    #nombreCancion {
+      position: fixed;
+      left: 24px;
+      bottom: 22px;
+      z-index: 30;
+      opacity: 0;
+      transform: translateY(10px);
+      transition:
+        opacity 1.8s ease,
+        transform 1.8s ease;
+      font-family: Arial, sans-serif;
+      text-align: left;
+      pointer-events: none;
+    }
+
+    #nombreCancion.visible {
+      opacity: 0.55;
+      transform: translateY(0);
+    }
+
+    #nombreCancion strong {
+      display: block;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    #nombreCancion span {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      opacity: 0.75;
+    }
+
     #final {
-      z-index: 20;
+      z-index: 25;
       text-align: center;
       opacity: 0;
-      pointer-events: none;
     }
 
     #final.visible {
@@ -166,7 +216,7 @@
       font-style: italic;
     }
 
-    #audio {
+    audio {
       display: none;
     }
 
@@ -199,14 +249,22 @@
         padding: 24px;
       }
 
+      #introTexto {
+        min-height: 330px;
+      }
+
       #texto {
-        min-height: 350px;
-        line-height: 1.6;
+        min-height: 390px;
+        line-height: 1.58;
+      }
+
+      #nombreCancion {
+        left: 18px;
+        bottom: 16px;
       }
 
       #botonComenzar {
-        margin-top: 42px;
-        padding: 13px 30px;
+        margin-top: 26px;
       }
     }
   </style>
@@ -216,11 +274,7 @@
 
   <section id="introduccion" class="pantalla">
     <div class="intro-contenido">
-      <h1 class="intro-frase">Hay cosas...</h1>
-
-      <h2 class="intro-frase segunda">
-        que nunca pude decirte.
-      </h2>
+      <div id="introTexto"></div>
 
       <button id="botonComenzar">
         Comenzar
@@ -250,6 +304,11 @@
     </div>
   </section>
 
+  <div id="nombreCancion">
+    <strong>♪ Robbers</strong>
+    <span>The 1975</span>
+  </div>
+
   <audio id="audio" preload="auto">
     <source src="./cancion.mp3.mp3" type="audio/mpeg">
   </audio>
@@ -258,9 +317,71 @@
     const introduccion = document.getElementById("introduccion");
     const historia = document.getElementById("historia");
     const final = document.getElementById("final");
-    const texto = document.getElementById("texto");
+
+    const introTexto = document.getElementById("introTexto");
     const botonComenzar = document.getElementById("botonComenzar");
+
+    const texto = document.getElementById("texto");
     const audio = document.getElementById("audio");
+    const nombreCancion = document.getElementById("nombreCancion");
+
+    const introduccionFrases = [
+      {
+        texto: "Si estás leyendo esto...",
+        duracion: 3000,
+        pequeno: false
+      },
+      {
+        texto: "...es porque decidiste llegar hasta aquí.",
+        duracion: 2800,
+        pequeno: false
+      },
+      {
+        texto: "Y eso significa mucho para mí.",
+        duracion: 3000,
+        pequeno: false
+      },
+      {
+        texto: "Hay recuerdos...\n\n...que nunca dejan de existir.",
+        duracion: 3500,
+        pequeno: false
+      },
+      {
+        texto: "Hay personas...\n\n...que, aunque pase el tiempo,\nnunca terminan de irse.",
+        duracion: 4200,
+        pequeno: false
+      },
+      {
+        texto: "Y hay palabras...\n\n...que simplemente jamás encontraron\nel momento correcto para ser dichas.",
+        duracion: 4800,
+        pequeno: false
+      },
+      {
+        texto: "No escribí esto esperando cambiar tu decisión.",
+        duracion: 3500,
+        pequeno: true
+      },
+      {
+        texto: "Lo escribí...\n\n...porque no quería que el silencio\nfuera lo último que quedara entre nosotros.",
+        duracion: 5000,
+        pequeno: true
+      },
+      {
+        texto: "Solo quiero pedirte una cosa.",
+        duracion: 3000,
+        pequeno: true
+      },
+      {
+        texto: "Si decides continuar...",
+        duracion: 3000,
+        pequeno: true
+      },
+      {
+        texto: "Prométeme que llegarás hasta el final.",
+        duracion: 5000,
+        pequeno: false
+      }
+    ];
 
     const fragmentos = [
       `No sé qué tan difícil pudo ser...
@@ -405,6 +526,47 @@ con otra persona.`
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    async function mostrarIntro() {
+      await esperar(3000);
+
+      for (const frase of introduccionFrases) {
+        introTexto.classList.remove("visible");
+        await esperar(900);
+
+        introTexto.textContent = frase.texto;
+        introTexto.classList.toggle("pequeno", frase.pequeno);
+
+        introTexto.classList.add("visible");
+
+        await esperar(frase.duracion);
+
+        introTexto.classList.remove("visible");
+        await esperar(1100);
+      }
+
+      introTexto.textContent = "";
+      botonComenzar.classList.add("visible");
+    }
+
+    async function fadeInAudio() {
+      audio.volume = 0;
+
+      try {
+        await audio.play();
+
+        const objetivo = 0.58;
+        const pasos = 35;
+        const incremento = objetivo / pasos;
+
+        for (let i = 0; i < pasos; i++) {
+          audio.volume = Math.min(objetivo, audio.volume + incremento);
+          await esperar(120);
+        }
+      } catch (error) {
+        console.log("No se pudo iniciar el audio:", error);
+      }
+    }
+
     async function escribir(textoCompleto) {
       texto.innerHTML = "";
 
@@ -422,15 +584,15 @@ con otra persona.`
         let retraso = velocidadEscritura;
 
         if (caracter === ".") {
-          retraso = 260;
+          retraso = 250;
         } else if (
           caracter === "," ||
           caracter === ":" ||
           caracter === ";"
         ) {
-          retraso = 130;
+          retraso = 120;
         } else if (caracter === "\n") {
-          retraso = 180;
+          retraso = 170;
         }
 
         await esperar(retraso);
@@ -438,7 +600,6 @@ con otra persona.`
 
       await esperar(pausaEntreFragmentos);
 
-      texto.style.transition = "opacity 0.9s ease";
       texto.style.opacity = "0";
 
       await esperar(900);
@@ -451,14 +612,13 @@ con otra persona.`
 
       introduccion.classList.add("oculta");
 
-      try {
-        audio.volume = 0.55;
-        await audio.play();
-      } catch (error) {
-        console.log("La canción todavía no está disponible.");
-      }
+      fadeInAudio();
 
-      await esperar(1500);
+      await esperar(1800);
+
+      nombreCancion.classList.add("visible");
+
+      await esperar(4000);
 
       historia.classList.remove("oculta");
 
@@ -471,8 +631,9 @@ con otra persona.`
       }
 
       historia.classList.add("oculta");
+      nombreCancion.classList.remove("visible");
 
-      await esperar(1600);
+      await esperar(1700);
 
       mostrarFinal();
     }
@@ -500,6 +661,8 @@ con otra persona.`
     }
 
     botonComenzar.addEventListener("click", comenzarHistoria);
+
+    mostrarIntro();
   </script>
 
 </body>
